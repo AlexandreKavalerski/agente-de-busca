@@ -8,3 +8,9 @@ application.windows32
 application.windows64
 application.macosx
 out
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
