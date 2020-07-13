@@ -17,7 +17,8 @@ class Environment():
         self.rows = rows
         self.cols = cols
         
-    def generate_environment(self, food_position, vehicle_position, quantity_of_obstacles=3):
+    def generate_environment(self, food_position, vehicle_position, quantity_of_obstacles=4):
+        obstacles = 0
         # Gera a matrix com celulas vazias
         self.matrix = [[0] * self.rows for i in range(self.cols)]
         for i in range(self.cols):
@@ -28,3 +29,9 @@ class Environment():
         self.matrix[food_position.y][food_position.x].set_type(SpaceTypes.TYPE_FOOD, SpaceTypes.FOOD_COLOR)
         self.matrix[vehicle_position.y][vehicle_position.x].set_type(SpaceTypes.TYPE_VEHICLE, SpaceTypes.VEHICLE_COLOR)
         
+        while(obstacles < quantity_of_obstacles):
+            random_x = int(random(self.rows))
+            random_y = int(random(self.cols))
+            if(self.matrix[random_y][random_x].type == SpaceTypes.TYPE_EMPTY):
+                self.matrix[random_y][random_x].set_type(SpaceTypes.TYPE_OBSTACLE, SpaceTypes.OBSTACLE_COLOR)
+                obstacles += 1
