@@ -3,7 +3,7 @@ import SpaceTypes
 class Grid:
     
     def __init__(self, matrix, rows, cols, spacing=49):
-        self.spacing = max(width/cols, height/rows)
+        self.spacing = min(width/cols, height/rows)
         self.cols = cols
         self.rows = rows
         self.matrix = matrix
