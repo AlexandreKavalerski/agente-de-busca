@@ -1,4 +1,3 @@
-import SpaceTypes
 
 class Grid:
     

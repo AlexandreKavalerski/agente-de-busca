@@ -1,6 +1,6 @@
 from Position import Position
 import OperationTypes
-import SpaceTypes
+import CellTypes
 
 class Node:
     
@@ -29,7 +29,7 @@ def successor_function(node, space):
     
     #Retorna somente os filhos validos
     children = list(filter(None, children))
-    children = [c for c in children if space[c.state.row][c.state.col].type != SpaceTypes.TYPE_OBSTACLE]
+    children = [c for c in children if space[c.state.row][c.state.col].type != CellTypes.TYPE_OBSTACLE]
     
     return children
     
