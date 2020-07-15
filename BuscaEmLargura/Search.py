@@ -18,7 +18,7 @@ def dfs(goal, frontier, space):
     actual_node = frontier.pop(0)
     
     
-    while space[actual_node.state.line][actual_node.state.col].type != goal.type:
+    while space[actual_node.state.row][actual_node.state.col].type != goal.type:
         children = successor_function(actual_node, space)
         print('len: {}'.format(len(children)))
         for c in children:            
