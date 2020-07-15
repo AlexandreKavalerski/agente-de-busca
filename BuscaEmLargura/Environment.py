@@ -27,12 +27,12 @@ class Environment():
                 self.matrix[i][j] = Cell()
 
         # Adiciona comida e veiculo na matriz (alterando o valor das celulas vazias que ocupam suas posicoes)
-        self.matrix[food_position.line][food_position.col].set_type(SpaceTypes.TYPE_FOOD, SpaceTypes.FOOD_COLOR)
-        self.matrix[vehicle_position.line][vehicle_position.col].set_type(SpaceTypes.TYPE_VEHICLE, SpaceTypes.VEHICLE_COLOR)
+        self.matrix[food_position.row][food_position.col].set_type(SpaceTypes.TYPE_FOOD, SpaceTypes.FOOD_COLOR)
+        self.matrix[vehicle_position.row][vehicle_position.col].set_type(SpaceTypes.TYPE_VEHICLE, SpaceTypes.VEHICLE_COLOR)
         
         while(obstacles < quantity_of_obstacles):
-            random_x = int(random(self.cols))
-            random_y = int(random(self.rows))
-            if(self.matrix[random_y][random_x].type == SpaceTypes.TYPE_EMPTY):
-                self.matrix[random_y][random_x].set_type(SpaceTypes.TYPE_OBSTACLE, SpaceTypes.OBSTACLE_COLOR)
+            random_col = int(random(self.cols))
+            random_row = int(random(self.rows))
+            if(self.matrix[random_row][random_col].type == SpaceTypes.TYPE_EMPTY):
+                self.matrix[random_row][random_col].set_type(SpaceTypes.TYPE_OBSTACLE, SpaceTypes.OBSTACLE_COLOR)
                 obstacles += 1

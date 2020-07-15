@@ -15,7 +15,7 @@ class Node:
         self.previousNode = previousNode
         
     def __str__(self):
-        return 'Pos({}, {}) - Op: {} - Prev: {}'.format(self.state.line, self.state.col, self.operation, self.previousNode)
+        return 'Pos({}, {}) - Op: {} - Prev: {}'.format(self.state.row, self.state.col, self.operation, self.previousNode)
         
         
 
@@ -29,34 +29,34 @@ def successor_function(node, space):
     
     #Retorna somente os filhos validos
     children = list(filter(None, children))
-    children = [c for c in children if space[c.state.line][c.state.col].type != SpaceTypes.TYPE_OBSTACLE]
+    children = [c for c in children if space[c.state.row][c.state.col].type != SpaceTypes.TYPE_OBSTACLE]
     
     return children
     
     
 def move_up(node):
-    new_line = node.state.line - 1
+    new_line = node.state.row - 1
     new_col = node.state.col
     
     new_state = Position(new_col, new_line)
     return Node(new_state, OperationTypes.MOVE_UP, node) if new_line >= 0 else None
     
 def move_right(node, col_limit):
-    new_line = node.state.line
+    new_line = node.state.row
     new_col = node.state.col + 1
     
     new_state = Position(new_col, new_line)
     return Node(new_state, OperationTypes.MOVE_RIGHT, node) if new_col < col_limit else None    
 
 def move_down(node, line_limit):
-    new_line = node.state.line + 1
+    new_line = node.state.row + 1
     new_col = node.state.col
     
     new_state = Position(new_col, new_line)
     return Node(new_state, OperationTypes.MOVE_DOWN, node) if new_line < line_limit else None
 
 def move_left(node):
-    new_line = node.state.line
+    new_line = node.state.row
     new_col = node.state.col - 1
     
     new_state = Position(new_col, new_line)

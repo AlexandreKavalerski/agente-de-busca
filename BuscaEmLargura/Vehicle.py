@@ -2,5 +2,5 @@ from Position import Position
 
 class Vehicle():
 
-    def __init__(self, x, y):
-        self.position = Position(x, y)
+    def __init__(self, row, col):
+        self.position = Position(row, col)
