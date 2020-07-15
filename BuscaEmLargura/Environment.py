@@ -31,8 +31,8 @@ class Environment():
         self.matrix[vehicle_position.line][vehicle_position.col].set_type(SpaceTypes.TYPE_VEHICLE, SpaceTypes.VEHICLE_COLOR)
         
         while(obstacles < quantity_of_obstacles):
-            random_x = int(random(self.rows))
-            random_y = int(random(self.cols))
+            random_x = int(random(self.cols))
+            random_y = int(random(self.rows))
             if(self.matrix[random_y][random_x].type == SpaceTypes.TYPE_EMPTY):
                 self.matrix[random_y][random_x].set_type(SpaceTypes.TYPE_OBSTACLE, SpaceTypes.OBSTACLE_COLOR)
                 obstacles += 1
