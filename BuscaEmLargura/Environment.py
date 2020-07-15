@@ -20,14 +20,15 @@ class Environment():
     def generate_environment(self, food_position, vehicle_position, quantity_of_obstacles=4):
         obstacles = 0
         # Gera a matrix com celulas vazias
-        self.matrix = [[0] * self.rows for i in range(self.cols)]
-        for i in range(self.cols):
-            for j in range(self.rows):
+        self.matrix = [[0] * self.cols for i in range(self.rows)]
+        
+        for i in range(self.rows):
+            for j in range(self.cols):
                 self.matrix[i][j] = Cell()
-              
+
         # Adiciona comida e veiculo na matriz (alterando o valor das celulas vazias que ocupam suas posicoes)
-        self.matrix[food_position.y][food_position.x].set_type(SpaceTypes.TYPE_FOOD, SpaceTypes.FOOD_COLOR)
-        self.matrix[vehicle_position.y][vehicle_position.x].set_type(SpaceTypes.TYPE_VEHICLE, SpaceTypes.VEHICLE_COLOR)
+        self.matrix[food_position.line][food_position.col].set_type(SpaceTypes.TYPE_FOOD, SpaceTypes.FOOD_COLOR)
+        self.matrix[vehicle_position.line][vehicle_position.col].set_type(SpaceTypes.TYPE_VEHICLE, SpaceTypes.VEHICLE_COLOR)
         
         while(obstacles < quantity_of_obstacles):
             random_x = int(random(self.rows))
