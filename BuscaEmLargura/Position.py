@@ -7,5 +7,5 @@ class Position():
         return self.row == other.row and self.col == other.col
     
     def __str__(self):
-        return '({}, {})'.format(self.line, self.col) 
+        return '({}, {})'.format(self.row, self.col) 
         
