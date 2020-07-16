@@ -4,6 +4,7 @@ from Food import Food
 from Vehicle import Vehicle
 
 import CellTypes
+import SearchTypes
 import Search
 
 def setup():
@@ -11,18 +12,15 @@ def setup():
     size(700, 400)
     
     
-    env = Environment(4,4)
+    env = Environment(4, 4)
     food = Food(3,3)
     vehicle = Vehicle(0,0)
     
-    env.generate_environment(food.position, vehicle.position, 1)
+    env.generate_environment(food.position, vehicle.position)
     
     
     
-    grid = Grid(env.matrix, env.rows, env.cols)
-    
-    solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, type='DFS')
-    print(solution)
+    grid = Grid(env.matrix, env.rows, env.cols)   
     
     
 def draw():
@@ -30,4 +28,12 @@ def draw():
     
     grid.display()
     
-    
+def keyPressed():
+    if key == 'd':
+        solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, SearchTypes.DFS)
+    elif key == 'b':
+        solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, SearchTypes.BFS)
+    elif key == 'c':
+        env.clear_visited_cells()    
+        
+            
