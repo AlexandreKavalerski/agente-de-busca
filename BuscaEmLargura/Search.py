@@ -1,5 +1,6 @@
 from Node import Node, successor_function
 import OperationTypes
+import CellTypes
 
 '''
 initial_state: instancia da classe Position
@@ -23,7 +24,10 @@ def dfs(goal, frontier, space):
         print('filhos: {}'.format(len(children)))
         for c in children:            
             if c.state not in visited_states:
-                frontier.insert(0,c) 
+                frontier.insert(0,c)
+                
+            if space[actual_node.state.row][actual_node.state.col].type == CellTypes.TYPE_EMPTY:
+                space[actual_node.state.row][actual_node.state.col].set_visited()
             visited_states.append(actual_node.state)
 
         print('-----------------')

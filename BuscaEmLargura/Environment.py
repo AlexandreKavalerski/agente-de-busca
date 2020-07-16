@@ -3,6 +3,7 @@ class Cell():
     def __init__(self):
         self.type = CellTypes.TYPE_EMPTY
         self.color = CellTypes.EMPTY_COLOR
+        self.visited = False
         
     def set_type(self, t, c):
         self.type = t
@@ -10,6 +11,10 @@ class Cell():
         
     def __str__(self):
         return '[' + self.type + ']'
+    
+    def set_visited(self):
+        self.visited = True
+        self.color = CellTypes.VISITED_COLOR
         
 class Environment():
     def __init__(self, rows=8, cols=14):
