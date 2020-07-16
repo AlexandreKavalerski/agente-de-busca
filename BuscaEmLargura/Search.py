@@ -11,22 +11,24 @@ def search(initial_state, goal_state, space, type='DFS'):
     first_node = Node(initial_state, OperationTypes.NONE)
     frontier = [first_node]
     
-    dfs(goal_state, frontier, space)
+    return dfs(goal_state, frontier, space)
 
 def dfs(goal, frontier, space):
     visited_states = []
     actual_node = frontier.pop(0)
     
-    
     while space[actual_node.state.row][actual_node.state.col].type != goal.type:
+        print(actual_node)
         children = successor_function(actual_node, space)
-        print('len: {}'.format(len(children)))
+        print('filhos: {}'.format(len(children)))
         for c in children:            
             if c.state not in visited_states:
-                frontier.append(c) 
-                visited_states.append(c.state)
-        
-        actual_node = frontier.pop()
-        print(len(frontier))
-    
+                frontier.insert(0,c) 
+            visited_states.append(actual_node.state)
+
+        print('-----------------')
+        for n in frontier: print(n.state)
+        print('-----------------')        
+        actual_node = frontier.pop(0)
+    return actual_node
     
