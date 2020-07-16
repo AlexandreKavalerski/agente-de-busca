@@ -15,6 +15,9 @@ class Cell():
     def set_visited(self):
         self.visited = True
         self.color = CellTypes.VISITED_COLOR
+    
+    def set_solution(self):
+        self.color = CellTypes.SOLUTION_COLOR
         
 class Environment():
     def __init__(self, rows=8, cols=14):

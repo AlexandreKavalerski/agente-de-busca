@@ -35,4 +35,11 @@ def dfs(goal, frontier, space):
         print('-----------------')        
         actual_node = frontier.pop(0)
     return actual_node
+
+def visit_solution(node, space):
+    if node.previousNode is not None:
+        if space[node.state.row][node.state.col].type == CellTypes.TYPE_EMPTY:
+            space[node.state.row][node.state.col].set_solution()
+        return visit_solution(node.previousNode, space)
+    return True
     
