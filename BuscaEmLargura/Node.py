@@ -35,29 +35,29 @@ def successor_function(node, space):
     
     
 def move_up(node):
-    new_line = node.state.row - 1
+    new_row = node.state.row - 1
     new_col = node.state.col
     
-    new_state = Position(new_col, new_line)
-    return Node(new_state, OperationTypes.MOVE_UP, node) if new_line >= 0 else None
+    new_state = Position(new_row, new_col)
+    return Node(new_state, OperationTypes.MOVE_UP, node) if new_row >= 0 else None
     
 def move_right(node, col_limit):
-    new_line = node.state.row
+    new_row = node.state.row
     new_col = node.state.col + 1
     
-    new_state = Position(new_col, new_line)
+    new_state = Position(new_row, new_col)
     return Node(new_state, OperationTypes.MOVE_RIGHT, node) if new_col < col_limit else None    
 
-def move_down(node, line_limit):
-    new_line = node.state.row + 1
+def move_down(node, row_limit):
+    new_row = node.state.row + 1
     new_col = node.state.col
     
-    new_state = Position(new_col, new_line)
-    return Node(new_state, OperationTypes.MOVE_DOWN, node) if new_line < line_limit else None
+    new_state = Position(new_row, new_col)
+    return Node(new_state, OperationTypes.MOVE_DOWN, node) if new_row < row_limit else None
 
 def move_left(node):
-    new_line = node.state.row
+    new_row = node.state.row
     new_col = node.state.col - 1
     
-    new_state = Position(new_col, new_line)
+    new_state = Position(new_row, new_col)
     return Node(new_state, OperationTypes.MOVE_LEFT, node) if new_col >= 0 else None
