@@ -22,6 +22,12 @@ class Environment():
         self.rows = rows
         self.cols = cols
         
+    def clear_visited_cells():
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.matrix[i][j].self.visited = False
+                self.matrix[i][j].color = CellTypes.EMPTY_COLOR
+        
     def generate_environment(self, food_position, vehicle_position, quantity_of_obstacles=4):
         obstacles = 0
         # Gera a matrix com celulas vazias
