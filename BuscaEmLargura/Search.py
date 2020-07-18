@@ -37,7 +37,7 @@ def dfs(goal, frontier, space):
 
 def bfs(goal, frontier, space):
     visited_states = []
-    actual_node = frontier.pop()
+    actual_node = frontier.pop(0)
     
     while space[actual_node.state.row][actual_node.state.col].type != goal.type:
         children = successor_function(actual_node, space)
@@ -48,9 +48,9 @@ def bfs(goal, frontier, space):
                 
             if space[actual_node.state.row][actual_node.state.col].type == CellTypes.TYPE_EMPTY:
                 space[actual_node.state.row][actual_node.state.col].set_visited()
+                
             visited_states.append(actual_node.state)
-        
-        actual_node = frontier.pop()
+        actual_node = frontier.pop(0)
     return actual_node
 
 def visit_solution(node, space):
