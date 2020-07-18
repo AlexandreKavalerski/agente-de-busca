@@ -12,11 +12,11 @@ def setup():
     size(700, 400)
     
     
-    env = Environment(4, 4)
-    food = Food(3,3)
+    env = Environment()
+    food = Food(5,8)
     vehicle = Vehicle(0,0)
     
-    env.generate_environment(food.position, vehicle.position)
+    env.generate_environment(food.position, vehicle.position,10)
     
     
     
@@ -31,8 +31,10 @@ def draw():
 def keyPressed():
     if key == 'd':
         solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, SearchTypes.DFS)
+        Search.visit_solution(solution, env.matrix)
     elif key == 'b':
         solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, SearchTypes.BFS)
+        Search.visit_solution(solution, env.matrix)
     elif key == 'c':
         env.clear_visited_cells()    
         
