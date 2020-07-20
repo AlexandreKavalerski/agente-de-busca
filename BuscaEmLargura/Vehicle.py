@@ -54,7 +54,6 @@ class Vehicle():
                     self.move(op, col_limit)
                 elif op == OperationTypes.MOVE_DOWN:
                     self.move(op, row_limit)
-                self.move(op)
                 env.update_vehicle_position(self.position)
     
     def get_operations(self, node, operations):
