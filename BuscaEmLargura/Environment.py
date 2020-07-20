@@ -17,6 +17,7 @@ class Cell():
         self.color = CellTypes.VISITED_COLOR
     
     def set_solution(self):
+        self.visited = True
         self.color = CellTypes.SOLUTION_COLOR
         
 class Environment():
@@ -51,3 +52,15 @@ class Environment():
             if(self.matrix[random_row][random_col].type == CellTypes.TYPE_EMPTY):
                 self.matrix[random_row][random_col].set_type(CellTypes.TYPE_OBSTACLE, CellTypes.OBSTACLE_COLOR)
                 obstacles += 1
+    
+    def update_vehicle_position(self, vehicle_position):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.matrix[i][j].type == CellTypes.TYPE_VEHICLE:
+                    self.matrix[i][j] = Cell()
+                    self.matrix[i][j].set_solution()
+                    
+        self.matrix[vehicle_position.row][vehicle_position.col].set_type(CellTypes.TYPE_VEHICLE, CellTypes.VEHICLE_COLOR)
+        
+        
+                
