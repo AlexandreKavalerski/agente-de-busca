@@ -30,10 +30,10 @@ def draw():
     
 def keyPressed():
     if key == 'd':
-        solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, SearchTypes.DFS)
+        solution = vehicle.search_food(env.matrix, SearchTypes.DFS)
         Search.visit_solution(solution, env.matrix)
     elif key == 'b':
-        solution = Search.search(vehicle.position, env.matrix[food.position.row][food.position.col], env.matrix, SearchTypes.BFS)
+        solution = vehicle.search_food(env.matrix, SearchTypes.BFS)
         Search.visit_solution(solution, env.matrix)
     elif key == 'c':
         env.clear_visited_cells()    
