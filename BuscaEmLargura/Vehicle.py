@@ -32,7 +32,6 @@ class Vehicle():
             if new_position is not None:
                 self.position = new_position        
         
-    
     '''
     matrix: corresponde apenas a uma matriz de objetos do tipo Cell
     search_type: indica o tipo de busca a ser realizada // 'DFS' | 'BFS' | ...
@@ -41,4 +40,26 @@ class Vehicle():
         cell_food = Cell()
         cell_food.set_type(CellTypes.TYPE_FOOD, CellTypes.FOOD_COLOR)
         
-        return search(self.position, cell_food, matrix, search_type)
+        self.solution = search(self.position, cell_food, matrix, search_type) 
+        
+        return self.solution
+    
+    def run_solution(self, row_limit, col_limit, env):
+        if self.solution is not None:
+            operations = self.get_operations(self.solution, [])
+            for op in operations:
+                if op == OperationTypes.MOVE_LEFT or op == OperationTypes.MOVE_UP:
+                    self.move(op)
+                elif op == OperationTypes.MOVE_RIGHT:
+                    self.move(op, col_limit)
+                elif op == OperationTypes.MOVE_DOWN:
+                    self.move(op, row_limit)
+                self.move(op)
+                env.update_vehicle_position(self.position)
+    
+    def get_operations(self, node, operations):
+        if node.previousNode is not None:
+            operations.insert(0, node.operation)
+            return self.get_operations(node.previousNode, operations)
+        return operations
+        
