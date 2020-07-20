@@ -4,6 +4,7 @@ class Cell():
         self.type = CellTypes.TYPE_EMPTY
         self.color = CellTypes.EMPTY_COLOR
         self.visited = False
+        self.expanded = False
         
     def set_type(self, t, c):
         self.type = t
@@ -15,6 +16,10 @@ class Cell():
     def set_visited(self):
         self.visited = True
         self.color = CellTypes.VISITED_COLOR
+    
+    def set_expanded(self):
+        self.expanded = True
+        self.color = CellTypes.EXPANDED_COLOR
     
     def set_solution(self):
         self.visited = True
@@ -31,6 +36,9 @@ class Environment():
             for j in range(self.cols):
                 if self.matrix[i][j].visited:    
                     self.matrix[i][j].visited = False
+                    self.matrix[i][j].color = CellTypes.EMPTY_COLOR
+                if self.matrix[i][j].expanded:    
+                    self.matrix[i][j].expanded = False
                     self.matrix[i][j].color = CellTypes.EMPTY_COLOR
         
     def generate_environment(self, food_position, vehicle_position, quantity_of_obstacles=4):

@@ -27,6 +27,8 @@ def dfs(goal, frontier, space):
         for c in children:            
             if c.state not in visited_states:
                 frontier.insert(0,c)
+                if space[c.state.row][c.state.col].type == CellTypes.TYPE_EMPTY:
+                    space[c.state.row][c.state.col].set_expanded()
                 
             if space[actual_node.state.row][actual_node.state.col].type == CellTypes.TYPE_EMPTY:
                 space[actual_node.state.row][actual_node.state.col].set_visited()
@@ -45,6 +47,8 @@ def bfs(goal, frontier, space):
         for c in children:            
             if c.state not in visited_states:
                 frontier.append(c)
+                if space[c.state.row][c.state.col].type == CellTypes.TYPE_EMPTY:
+                    space[c.state.row][c.state.col].set_expanded()
                 
             if space[actual_node.state.row][actual_node.state.col].type == CellTypes.TYPE_EMPTY:
                 space[actual_node.state.row][actual_node.state.col].set_visited()
