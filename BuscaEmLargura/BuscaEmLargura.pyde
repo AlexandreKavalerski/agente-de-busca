@@ -31,10 +31,11 @@ def draw():
 def keyPressed():
     if key == 'd':
         solution = vehicle.search_food(env.matrix, SearchTypes.DFS)
+        print('Custo do caminho: ', solution.gValue)
         
     elif key == 'b':
         solution = vehicle.search_food(env.matrix, SearchTypes.BFS)
-        
+        print('Custo do caminho: ', solution.gValue)
     elif key == 'v':
         vehicle.run_solution(env.rows, env.cols, env)
     elif key == 'c':

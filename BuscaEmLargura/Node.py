@@ -7,11 +7,13 @@ class Node:
     '''
     state: instancia da classe Position
     operation: string com um dos valores do arquivo OperationTypes
+    gValue: valor correspondente a profundidade do no
     previousNode: instancia da classe Node
     '''
-    def __init__(self, state, operation, previousNode=None):
+    def __init__(self, state, operation, gValue=0, previousNode=None):
         self.state = state
         self.operation = operation
+        self.gValue = gValue
         self.previousNode = previousNode
         
     def __str__(self):
@@ -37,19 +39,19 @@ def successor_function(node, space):
 def move_up(node):
     new_state = node.state.move_up()
     
-    return Node(new_state, OperationTypes.MOVE_UP, node) if new_state is not None else None
+    return Node(new_state, OperationTypes.MOVE_UP, node.gValue+1, node) if new_state is not None else None
     
 def move_right(node, col_limit):
     new_state = node.state.move_right(col_limit)
     
-    return Node(new_state, OperationTypes.MOVE_RIGHT, node) if new_state is not None else None    
+    return Node(new_state, OperationTypes.MOVE_RIGHT, node.gValue+1, node) if new_state is not None else None    
 
 def move_down(node, row_limit):
     new_state = node.state.move_down(row_limit)
     
-    return Node(new_state, OperationTypes.MOVE_DOWN, node) if new_state is not None else None
+    return Node(new_state, OperationTypes.MOVE_DOWN, node.gValue+1, node) if new_state is not None else None
 
 def move_left(node):
     new_state = node.state.move_left()
     
-    return Node(new_state, OperationTypes.MOVE_LEFT, node) if new_state is not None else None
+    return Node(new_state, OperationTypes.MOVE_LEFT, node.gValue+1, node) if new_state is not None else None
