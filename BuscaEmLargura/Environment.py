@@ -12,7 +12,7 @@ class Cell():
         return '[' + self.type + ']'
         
 class Environment():
-    def __init__(self, rows=8, cols=14):
+    def __init__(self, rows=4, cols=7):
         self.matrix = None
         self.rows = rows
         self.cols = cols
