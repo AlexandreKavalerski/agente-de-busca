@@ -35,29 +35,21 @@ def successor_function(node, space):
     
     
 def move_up(node):
-    new_row = node.state.row - 1
-    new_col = node.state.col
+    new_state = node.state.move_up()
     
-    new_state = Position(new_row, new_col)
-    return Node(new_state, OperationTypes.MOVE_UP, node) if new_row >= 0 else None
+    return Node(new_state, OperationTypes.MOVE_UP, node) if new_state is not None else None
     
 def move_right(node, col_limit):
-    new_row = node.state.row
-    new_col = node.state.col + 1
+    new_state = node.state.move_right(col_limit)
     
-    new_state = Position(new_row, new_col)
-    return Node(new_state, OperationTypes.MOVE_RIGHT, node) if new_col < col_limit else None    
+    return Node(new_state, OperationTypes.MOVE_RIGHT, node) if new_state is not None else None    
 
 def move_down(node, row_limit):
-    new_row = node.state.row + 1
-    new_col = node.state.col
+    new_state = node.state.move_down(row_limit)
     
-    new_state = Position(new_row, new_col)
-    return Node(new_state, OperationTypes.MOVE_DOWN, node) if new_row < row_limit else None
+    return Node(new_state, OperationTypes.MOVE_DOWN, node) if new_state is not None else None
 
 def move_left(node):
-    new_row = node.state.row
-    new_col = node.state.col - 1
+    new_state = node.state.move_left()
     
-    new_state = Position(new_row, new_col)
-    return Node(new_state, OperationTypes.MOVE_LEFT, node) if new_col >= 0 else None
+    return Node(new_state, OperationTypes.MOVE_LEFT, node) if new_state is not None else None
