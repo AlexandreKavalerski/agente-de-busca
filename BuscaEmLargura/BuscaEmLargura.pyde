@@ -1,3 +1,6 @@
+import sys
+sys.path.append("../utils")
+
 from Grid import Grid
 from Environment import Environment
 from Food import Food
