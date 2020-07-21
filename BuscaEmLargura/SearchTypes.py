@@ -1,0 +1,5 @@
+DFS = 'depth_first_search'
+BFS = 'breadth_first_search'
+UCS = 'uniform_cost_search'
+GRE = 'greedy_search'
+STA = 'a_star_search'

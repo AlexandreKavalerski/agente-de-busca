@@ -1,9 +1,8 @@
-import SpaceTypes
 
 class Grid:
     
     def __init__(self, matrix, rows, cols, spacing=49):
-        self.spacing = max(width/cols, height/rows)
+        self.spacing = min(width/cols, height/rows)
         self.cols = cols
         self.rows = rows
         self.matrix = matrix
@@ -13,10 +12,10 @@ class Grid:
     def display(self):
         
         # Preenche um grid na tela tendo como referencia a matriz que representa o ambiente
-        for i in range(len(self.matrix)):
-            for j in range(len(self.matrix[i])):
-                x = i * self.spacing
-                y = j * self.spacing               
+        for i in range(self.rows):
+            for j in range(self.cols):
+                x = j * self.spacing
+                y = i * self.spacing               
                 
                 # Preenche o a celula no grid com a cor do seu tipo
                 fill(self.matrix[i][j].color)

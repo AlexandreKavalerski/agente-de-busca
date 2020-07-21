@@ -1,0 +1,5 @@
+MOVE_UP = 'up'
+MOVE_RIGHT = 'right'
+MOVE_DOWN = 'down'
+MOVE_LEFT = 'left'
+NONE = 'no_move'
