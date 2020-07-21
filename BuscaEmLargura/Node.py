@@ -14,12 +14,16 @@ class Node:
         self.state = state
         self.operation = operation
         self.gValue = gValue
+        self.hValue = None
         self.previousNode = previousNode
+        
+    def set_hValue(self, hValue):
+        self.hValue = hValue
         
     def __str__(self):
         return 'Pos({}, {}) - Op: {} - Prev: {}'.format(self.state.row, self.state.col, self.operation, self.previousNode)
         
-        
+                        
 
 def successor_function(node, space):
     children = []
@@ -34,6 +38,12 @@ def successor_function(node, space):
     children = [c for c in children if space[c.state.row][c.state.col].type != CellTypes.TYPE_OBSTACLE]
     
     return children
+
+def get_manhattan_distance(node, goal_position):
+    dy = abs(node.state.row - goal_position.row)
+    dx = abs(node.state.col - goal_position.col)
+    return dx + dy
+    
     
     
 def move_up(node):

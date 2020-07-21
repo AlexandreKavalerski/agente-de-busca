@@ -30,17 +30,22 @@ def draw():
     
 def keyPressed():
     if key == 'd':
-        solution = vehicle.search_food(env.matrix, SearchTypes.DFS)
+        solution = vehicle.search_food(env, SearchTypes.DFS)
         Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
         
     elif key == 'b':
-        solution = vehicle.search_food(env.matrix, SearchTypes.BFS)
+        solution = vehicle.search_food(env, SearchTypes.BFS)
         Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
     
     elif key == 'u':
-        solution = vehicle.search_food(env.matrix, SearchTypes.UCS)
+        solution = vehicle.search_food(env, SearchTypes.UCS)
+        Search.visit_solution(solution, env.matrix)
+        print('Custo do caminho: ', solution.gValue)
+        
+    elif key == 'g':
+        solution = vehicle.search_food(env, SearchTypes.GRE)
         Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
         
