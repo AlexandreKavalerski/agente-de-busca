@@ -12,6 +12,10 @@ import Search
 
 def setup():
     global env, grid, food, vehicle
+    global timeToWait, lastTime, foundSolution  
+    timeToWait = 2000
+    foundSolution = False
+    
     size(700, 400)
     
     
@@ -25,44 +29,25 @@ def setup():
     
     grid = Grid(env.matrix, env.rows, env.cols)   
     
+    lastTime = millis()
+    
     
 def draw():
     background(255)
-    
     grid.display()
     
-def keyPressed():
-    if key == 'd':
-        solution = vehicle.search_food(env, SearchTypes.DFS)
-        Search.visit_solution(solution, env.matrix)
-        print('Custo do caminho: ', solution.gValue)
-        
-    elif key == 'b':
+    global timeToWait, lastTime, foundSolution
+    if( millis() - lastTime > timeToWait and not foundSolution):      
         solution = vehicle.search_food(env, SearchTypes.BFS)
-        Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
-    
-    elif key == 'u':
-        solution = vehicle.search_food(env, SearchTypes.UCS)
-        Search.visit_solution(solution, env.matrix)
-        print('Custo do caminho: ', solution.gValue)
+        vehicle.run_solution(env.rows, env.cols, env)
         
-    elif key == 'g':
-        solution = vehicle.search_food(env, SearchTypes.GRE)
-        Search.visit_solution(solution, env.matrix)
-        print('Custo do caminho: ', solution.gValue)
-        
-    elif key == 's':
-        solution = vehicle.search_food(env, SearchTypes.STA)
-        Search.visit_solution(solution, env.matrix)
-        print('Custo do caminho: ', solution.gValue)
-        
-    elif key == 'v':
-        vehicle.run_solution(env.rows, env.cols, env)        
-    elif key == 'f':
+        lastTime = millis()
+        foundSolution = True
+    elif( millis() - lastTime > timeToWait and foundSolution):    
         env.clear_visited_cells()
         env.update_food_position()
-    elif key == 'c':
-        env.clear_visited_cells()    
-        
+        lastTime = millis()
+        foundSolution = False
+            
             
