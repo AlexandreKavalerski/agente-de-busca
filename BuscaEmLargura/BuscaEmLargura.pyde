@@ -49,6 +49,11 @@ def keyPressed():
         Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
         
+    elif key == 's':
+        solution = vehicle.search_food(env, SearchTypes.STA)
+        Search.visit_solution(solution, env.matrix)
+        print('Custo do caminho: ', solution.gValue)
+        
     elif key == 'v':
         vehicle.run_solution(env.rows, env.cols, env)        
     elif key == 'f':

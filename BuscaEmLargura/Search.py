@@ -20,7 +20,9 @@ def search(initial_state, goal_state, env, type):
     elif type == SearchTypes.UCS:
         return ucs(goal_state, frontier, env.matrix)
     elif type == SearchTypes.GRE:
-        return gre(goal_state, frontier, env)
+        return greedy(goal_state, frontier, env)
+    elif type == SearchTypes.STA:
+        return a_star(goal_state, frontier, env)
 
 def dfs(goal, frontier, space):
     visited_states = []
@@ -83,7 +85,7 @@ def ucs(goal, frontier, space):
         actual_node = frontier.pop(0)
     return actual_node
 
-def gre(goal, frontier, env):
+def greedy(goal, frontier, env):
     visited_states = []
     actual_node = frontier.pop(0)
     
@@ -102,6 +104,28 @@ def gre(goal, frontier, env):
                 
             visited_states.append(actual_node.state)
         frontier.sort(key=lambda node: node.hValue)
+        actual_node = frontier.pop(0)
+    return actual_node
+
+def a_star(goal, frontier, env):
+    visited_states = []
+    actual_node = frontier.pop(0)
+    
+    while env.matrix[actual_node.state.row][actual_node.state.col].type != goal.type:
+        children = successor_function(actual_node, env.matrix)
+        
+        for c in children:            
+            if c.state not in visited_states:
+                frontier.append(c)
+                c.set_hValue(get_manhattan_distance(c, env.food_position))
+                if env.matrix[c.state.row][c.state.col].type == CellTypes.TYPE_EMPTY:
+                    env.matrix[c.state.row][c.state.col].set_expanded()
+                
+            if env.matrix[actual_node.state.row][actual_node.state.col].type == CellTypes.TYPE_EMPTY:
+                env.matrix[actual_node.state.row][actual_node.state.col].set_visited()
+                
+            visited_states.append(actual_node.state)
+        frontier.sort(key=lambda node: (node.hValue + node.gValue))
         actual_node = frontier.pop(0)
     return actual_node
 
