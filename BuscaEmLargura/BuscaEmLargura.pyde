@@ -31,14 +31,21 @@ def draw():
 def keyPressed():
     if key == 'd':
         solution = vehicle.search_food(env.matrix, SearchTypes.DFS)
+        Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
         
     elif key == 'b':
         solution = vehicle.search_food(env.matrix, SearchTypes.BFS)
+        Search.visit_solution(solution, env.matrix)
         print('Custo do caminho: ', solution.gValue)
-    elif key == 'v':
-        vehicle.run_solution(env.rows, env.cols, env)
+    
+    elif key == 'u':
+        solution = vehicle.search_food(env.matrix, SearchTypes.UCS)
+        Search.visit_solution(solution, env.matrix)
+        print('Custo do caminho: ', solution.gValue)
         
+    elif key == 'v':
+        vehicle.run_solution(env.rows, env.cols, env)        
     elif key == 'f':
         env.clear_visited_cells()
         env.update_food_position()

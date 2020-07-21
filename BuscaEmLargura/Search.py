@@ -17,6 +17,8 @@ def search(initial_state, goal_state, space, type):
         return dfs(goal_state, frontier, space)
     elif type == SearchTypes.BFS:
         return bfs(goal_state, frontier, space)
+    elif type == SearchTypes.UCS:
+        return ucs(goal_state, frontier, space)
 
 def dfs(goal, frontier, space):
     visited_states = []
@@ -54,6 +56,28 @@ def bfs(goal, frontier, space):
                 space[actual_node.state.row][actual_node.state.col].set_visited()
                 
             visited_states.append(actual_node.state)
+        actual_node = frontier.pop(0)
+    return actual_node
+
+
+def ucs(goal, frontier, space):
+    visited_states = []
+    actual_node = frontier.pop(0)
+    
+    while space[actual_node.state.row][actual_node.state.col].type != goal.type:
+        children = successor_function(actual_node, space)
+        
+        for c in children:            
+            if c.state not in visited_states:
+                frontier.append(c)
+                if space[c.state.row][c.state.col].type == CellTypes.TYPE_EMPTY:
+                    space[c.state.row][c.state.col].set_expanded()
+                
+            if space[actual_node.state.row][actual_node.state.col].type == CellTypes.TYPE_EMPTY:
+                space[actual_node.state.row][actual_node.state.col].set_visited()
+                
+            visited_states.append(actual_node.state)
+        frontier.sort(key=lambda node: node.gValue)
         actual_node = frontier.pop(0)
     return actual_node
 
