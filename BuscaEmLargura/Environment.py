@@ -1,4 +1,6 @@
 import CellTypes
+from Position import Position
+
 class Cell():
     def __init__(self):
         self.type = CellTypes.TYPE_EMPTY
@@ -28,6 +30,8 @@ class Cell():
 class Environment():
     def __init__(self, rows=8, cols=14):
         self.matrix = None
+        self.food_position = None
+        self.vehicle_position = None
         self.rows = rows
         self.cols = cols
         
@@ -55,6 +59,9 @@ class Environment():
         # Adiciona comida e veiculo na matriz (alterando o valor das celulas vazias que ocupam suas posicoes)
         self.matrix[food_position.row][food_position.col].set_type(CellTypes.TYPE_FOOD, CellTypes.FOOD_COLOR)
         self.matrix[vehicle_position.row][vehicle_position.col].set_type(CellTypes.TYPE_VEHICLE, CellTypes.VEHICLE_COLOR)
+        self.food_position = food_position
+        self.vehicle_position = vehicle_position
+        
         
         while(obstacles < quantity_of_obstacles):
             random_col = int(random(self.cols))
@@ -69,6 +76,7 @@ class Environment():
         
         if(self.matrix[random_row][random_col].type == CellTypes.TYPE_EMPTY):
             self.matrix[random_row][random_col].set_type(CellTypes.TYPE_FOOD, CellTypes.FOOD_COLOR)
+            self.food_position = Position(random_row, random_col)
         else:
             self.update_food_position()
             
@@ -81,6 +89,7 @@ class Environment():
                     self.matrix[i][j].set_solution()
                     
         self.matrix[vehicle_position.row][vehicle_position.col].set_type(CellTypes.TYPE_VEHICLE, CellTypes.VEHICLE_COLOR)
+        self.vehicle_position = vehicle_position
         
         
                 
