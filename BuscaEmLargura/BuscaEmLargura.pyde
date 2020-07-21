@@ -38,6 +38,10 @@ def keyPressed():
         print('Custo do caminho: ', solution.gValue)
     elif key == 'v':
         vehicle.run_solution(env.rows, env.cols, env)
+        
+    elif key == 'f':
+        env.clear_visited_cells()
+        env.update_food_position()
     elif key == 'c':
         env.clear_visited_cells()    
         

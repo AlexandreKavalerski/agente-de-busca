@@ -36,10 +36,12 @@ class Environment():
             for j in range(self.cols):
                 if self.matrix[i][j].visited:    
                     self.matrix[i][j].visited = False
-                    self.matrix[i][j].color = CellTypes.EMPTY_COLOR
+                    if self.matrix[i][j].type == CellTypes.TYPE_EMPTY:
+                        self.matrix[i][j].color = CellTypes.EMPTY_COLOR
                 if self.matrix[i][j].expanded:    
                     self.matrix[i][j].expanded = False
-                    self.matrix[i][j].color = CellTypes.EMPTY_COLOR
+                    if self.matrix[i][j].type == CellTypes.TYPE_EMPTY:
+                        self.matrix[i][j].color = CellTypes.EMPTY_COLOR
         
     def generate_environment(self, food_position, vehicle_position, quantity_of_obstacles=4):
         obstacles = 0
@@ -60,6 +62,16 @@ class Environment():
             if(self.matrix[random_row][random_col].type == CellTypes.TYPE_EMPTY):
                 self.matrix[random_row][random_col].set_type(CellTypes.TYPE_OBSTACLE, CellTypes.OBSTACLE_COLOR)
                 obstacles += 1
+                
+    def update_food_position(self):
+        random_row = int(random(self.rows))
+        random_col = int(random(self.cols))
+        
+        if(self.matrix[random_row][random_col].type == CellTypes.TYPE_EMPTY):
+            self.matrix[random_row][random_col].set_type(CellTypes.TYPE_FOOD, CellTypes.FOOD_COLOR)
+        else:
+            self.update_food_position()
+            
     
     def update_vehicle_position(self, vehicle_position):
         for i in range(self.rows):
