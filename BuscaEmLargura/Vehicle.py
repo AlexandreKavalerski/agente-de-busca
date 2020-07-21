@@ -9,6 +9,7 @@ class Vehicle():
 
     def __init__(self, row, col):
         self.position = Position(row, col)
+        self.colected_food = 0 
         self.solution = None
         
     '''
@@ -55,6 +56,7 @@ class Vehicle():
                 elif op == OperationTypes.MOVE_DOWN:
                     self.move(op, row_limit)
                 env.update_vehicle_position(self.position)
+            self.colected_food += 1
     
     def get_operations(self, node, operations):
         if node.previousNode is not None:
