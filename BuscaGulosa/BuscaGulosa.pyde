@@ -40,7 +40,7 @@ def draw():
     
     global timeToWait, lastTime, foundSolution
     if( millis() - lastTime > timeToWait and not foundSolution):      
-        solution = vehicle.search_food(env, SearchTypes.BFS)
+        solution = vehicle.search_food(env, SearchTypes.GRE)
         print('Custo do caminho: ', solution.gValue)
         vehicle.run_solution(env.rows, env.cols, env)
         
